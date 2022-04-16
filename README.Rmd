@@ -1,0 +1,142 @@
+---
+title: "Calculus formula"
+author: "Percy Soto Becerra"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Derivadas
+
+### Definición
+
+------------------------------------------------------------------------
+
+## Antiderivadas (Integrales)
+
+$F$, denominada **antiderivada** de $f$ en el intervalo $I$ si $D_xF(x)=f(x)$ en $I$; donde $F(x) = f(x)$, $\forall x \in I$.
+
+De esto se desprende:
+
+-   $D_x\int f(x)dx = f(x)$
+
+-   $\int_{}{}D_xf(x)dx=f(x)+C$
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE}
+x <- seq(-2, 2, 0.1)
+Fx1 <- x ^ 4 + 6
+Fx2 <- x ^ 4
+Fx3 <- x ^ 4 - 4
+
+library(ggplot2)
+library(tidyverse)
+data <- data.frame(
+  X = rep(x, 3), 
+  Fx = c(Fx1, Fx2, Fx3),
+  Z = c(rep("F(x) = x^4 + 6", length(x)), 
+        rep("F(x) = x^4", length(x)), 
+        rep("F(x) = x^4 - 4", length(x)))
+  )
+
+data %>% 
+  ggplot() + 
+  aes(x = X, y = Fx, colour = Z) + 
+  geom_line() + 
+  geom_hline(
+    yintercept = 0, 
+    linetype = "solid", 
+    color = "black", 
+    size = 1) + 
+  geom_vline(
+    xintercept = 0, 
+    linetype = "solid", 
+    color = "black", 
+    size = 1) + 
+  theme_bw()
+```
+
+### Teorema A. Regla de la potencia
+
+Si $r$ es cualquier número racional, excepto -1, entonces
+
+$$
+\int_{}{}x^rdx=\frac{x^{r+1}}{r+1}+C
+$$
+
+Se deducen dos cosas:
+
+-   Caso $r = 0$:
+
+    $$
+    \int_{}{}1dx=x+C
+    $$
+
+-   Como no se especificó ningún intervalo, es tácito que la integral es válidad solo en los intervalos donde $x^r$ está definida.
+
+    -   Si $r < 0$, entonces el intervalo $I$ no debe incluir $x = 0$.
+
+    -   A esta integral donde no se le define el intervalo $I$ se le denomina **integral indefinida**, en lugar de antiderivada.
+
+### Teorema B. Integral de senos y cosenos
+
+$$
+\int_{}{}sen(x)dx=-cox(x)+C
+$$
+
+$$
+\int_{}{}cos(x)dx=sen(x)+C
+$$
+
+### Teorema C. La integral definida es un operador lineal
+
+Suponga que $f$ y $g$ tienen antiderivadas (integrales indefinidas) y sea $k$ una constante. Entonces:
+
+-   $\int_{}{}kf(x)dx=k\int_{}{}f(x)dx$
+
+-   $\int_{}{}[f(x) + g(x)]dx = \int_{}{}f(x)dx + \int_{}{}g(x)dx$
+
+-   $\int_{}{}[f(x)-g(x)]dx = \int_{}{}f(x)dx - \int_{}{}g(x)dx$
+
+### Teorema D. Regla generalizada de la potencia
+
+- $\int_{}{}[g(x)]^rg'(x)dx = \frac{[g(x)]^{r+1}}{r+1}+C$
+
+### Extras
+
+- $\int_{}{}[f(x)g'(x) + g(x)f'(x)]dx = f(x)g(x) + C$
+
+- $\int_{}{}\frac{g(x)f'(x) - f(x)g'(x)}{g^2(x)}dx = \frac{f(x)}{g(x)} + C$
+
+## Sumatorias
+
+$$
+\sum_{i = 1}^{n}a_i = a_1 + a_2 + a_3 + ... + a_n
+$$
+
+### Teorema A. Linealidad de $\sum$
+
+Si c es una constante, entonces
+
+- $$\sum_{i = 1}^{n}ca_i = c\sum_{i=1}^{n}a_i$$
+
+- $$\sum_{i=1}^{n}(a_i+b_i) = \sum_{i=1}^{n}a_i + \sum_{i=1}^{n}b_i$$
+
+- $$\sum_{i=1}^{n}(a_i - b_i) = \sum_{i=1}^{n}a_i - \sum_{i=1}^{n}b_i$$
+
+
+### Formulas de sumatorias conocidas
+
+- $$\sum_{i=1}^{n}(a_{i+1} - a_i) = a_{n+1} - a_1$$
+
+- $$\sum_{i=1}^{n}[(i + 1)^2 - i^2] = (n+1)^2-1$$
+
+- $$\sum_{i=1}^{n}i = \frac{n(n+1)}{2}$$
+
+- $$\sum_{i=1}^{n}i^2 = \frac{n(n+1)(2n+1)}{6}$$
+
+- $$\sum_{i=1}^{n}i^3 = [\frac{n(n+1)}{2}]^2$$
+
+- $$\sum_{i=1}^{n}i^4 = \frac{n(n+1)(2n+1)(3n^2 + 3n - 1)}{30}$$
